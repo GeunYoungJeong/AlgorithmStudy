@@ -1,5 +1,21 @@
 {
     "files.associations": {
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "iostream": "cpp",
+        "functional": "cpp",
+        "numeric": "cpp",
+        "random": "cpp",
+        "regex": "cpp",
+        "string": "cpp",
+        "xlocmon": "cpp",
+        "xlocnum": "cpp",
+        "xloctime": "cpp",
+        "xstddef": "cpp",
+        "cstdlib": "cpp",
+        "algorithm": "cpp",
+        "utility": "cpp",
+        "vector": "cpp",
+        "tuple": "cpp",
+        "queue": "cpp"
     }
 }
