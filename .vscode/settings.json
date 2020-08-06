@@ -16,6 +16,8 @@
         "utility": "cpp",
         "vector": "cpp",
         "tuple": "cpp",
-        "queue": "cpp"
+        "queue": "cpp",
+        "list": "cpp",
+        "type_traits": "cpp"
     }
 }
