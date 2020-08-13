@@ -4,6 +4,7 @@ using namespace std;
 
 int field[1001][1001];
 int dist[1001][1001][2];
+int cnt[1001][1001];
 
 int n, m;
 int dx[4] = { 0, -1, 0, 1 };
