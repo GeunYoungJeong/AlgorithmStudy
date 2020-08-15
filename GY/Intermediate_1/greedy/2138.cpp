@@ -1,7 +1,3 @@
-/**
- * 별이나 찍읍시다!
- **/
-
 #include <bits/stdc++.h>
 
 using namespace std;

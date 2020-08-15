@@ -3,43 +3,30 @@
 using namespace std;
 
 int solve(int num) {
-    int mok = INT_MAX;
-    int namerge;
-    int b = 2;
-    while (1) {
-        bool check2 = false;
-        int cnt = 0;
-        int temp;
-
-        while (1) {
-            if (mok == 0) break;
-            if (mok == INT_MAX) {
-                mok = num / b;
-                namerge = num % b;
+    int t = 2;
+    int m, n;
+    while(1) {
+        bool check;
+        stack <int> r;
+        m = num / t;
+        n = num % t;
+        if(n==m) return t;
+        r.push(n);
+        while(m > 0) {
+            n = m % t;
+            m = m / t;
+            if(r.top() != n) {
+                check = true;
+                break;
             }
             else {
-                namerge = mok % b;
-                mok = mok / b;
-            }            
-            if(cnt>=1) {
-                if(temp != namerge) {
-                    check2 = true;
-                    break;
-                }
+                r.push(n);
             }
-            cnt++;
-            temp = namerge;
         }
-
-        if(check2) {
-            b++;
-            namerge = 0;
-            mok = INT_MAX;   
-        }
-        else {
-            return b;
-        }
+        if(!check) return t;
+        t++;
     }
+    
 }
 
 int main() {

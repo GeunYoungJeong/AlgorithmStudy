@@ -2,33 +2,37 @@
 
 using namespace std;
 
-int range;
 int t, n, k;
 
-void solve(int index, int jump, int dest, int * arr) {
-    if(index > dest) return;
-    if(index == dest) {
-        if(range > jump) range = jump;
-    }
-    for(int i = 1; i<=k; i++) {
-        if(count(arr, arr+n, index+i) == 1) {
-            solve(index+i, jump+1, arr[n-1], arr);
-        }
-    }
-}
+int input[1000005];
+int dp[1000005];
 
 int main() {
     scanf("%d", &t);
     for(int i = 1; i<=t; i++) {
-        int range = 1000000;
-        int arr[100001];
+        memset(input, 0, sizeof(input));
+        memset(dp, 0, sizeof(dp));
         scanf("%d", &n);
-        for(int i = 0; i<n; i++) {
-            scanf("%d", &arr[i]);
+        input[0] = 0;
+        for(int i = 1; i<=n; i++) {
+            scanf("%d", &input[i]);
         }
+        n++;
         scanf("%d", &k);
-        solve(0, 0, arr[n-1], arr);
-        if(range == 1000000) range = -1;
-        printf("Case #%d\n%d\n", i, range);
+        for(int i = 0; i<n; i++) {
+            if(i >= 1) {
+                if(input[i-1] + k < input[i]) {
+                    dp[n-1] = -1;
+                    break;
+                }
+            }
+            for(int j = i+1; j<n; j++) {
+                if(input[j] - input[i] > k) break;
+                if(dp[j] == 0 && dp[j] < dp[i] + 1) {
+                    dp[j] = dp[i] + 1;
+                }
+            }
+        }
+        printf("Case #%d\n%d\n", i, dp[n-1]);
     }
 }
