@@ -3,42 +3,46 @@
 using namespace std;
 
 vector <char> arr;
+char alphabet[26];
+int n;
 
-int solve(string str) {
-    int len = str.length();
-    int temp = 0;
-    int jari = 1;
+int solve(vector <string> &v) {
+    int ret = 0;
+    for(int idx = 0; idx < n; idx++) {
+        int len = v[idx].length();
+        int jari = 1;
+        int temp = 0;
 
-    for(int i = 0; i<len; i++) {
-        for(int j = 0; j<arr.size(); j++) {
-            if(arr[j] == str[i]) {
-                temp += (9-j) * jari;
-                break;
-            }
+        for(int i = len-1; i>=0; i--) {
+            temp += (alphabet[v[idx][i]-65] * jari);
+            jari *= 10;
         }
-        jari *= 10;
+        
+        ret += temp;
     }
-    //printf("%d\n", temp);
-    return temp;
+    return ret;
 }
 
 int main() {
-    int n;
     scanf("%d", &n);
     vector <string> v(n);
     for(int i = 0; i<n; i++) {
         cin >> v[i];
-        for(int j = 0; j<v[i].length(); j++) {
-            if(count(arr.begin(), arr.end(), v[i][j]) == 0) arr.push_back(v[i][j]);
+        int len = v[i].length();
+        for(int j = 0; j<len; j++) {
+            arr.push_back(v[i][j]);
         }
     }
 
+    sort(arr.begin(), arr.end());
+    arr.erase(unique(arr.begin(), arr.end()), arr.end());
+
     int answer = 0;
     do {
-        int temp = 0;
-        for(int i = 0; i<n; i++) {
-            temp += solve(v[i]);
+        for(int i = 0; i<arr.size(); i++) {
+            alphabet[arr[i]-65] = 9-i;
         }
+        int temp = solve(v);
         if(answer < temp) answer = temp;
     } while(next_permutation(arr.begin(), arr.end()));
 
