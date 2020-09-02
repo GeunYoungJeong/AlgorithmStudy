@@ -2,46 +2,42 @@
 
 using namespace std;
 
-unsigned long long solve(vector <unsigned int> &v, int len) {
-    int s = v.size();
+int k, n;
+
+unsigned long long solve(vector <unsigned int> &v, unsigned long long len) {
     unsigned long long ret = 0;
-    for(int i = 0; i<s; i++) {
+    for(int i = 0; i<k; i++) {
         ret += (v[i] / len);
     }
     return ret;
 }
 
 int main() {
-    int k, n;
     scanf("%d %d", &k, &n);
     vector <unsigned int> v(k);
+    unsigned long long right = 0;
     for(int i = 0; i<k; i++) {
         scanf("%d", &v[i]);
+        if(v[i] > right) right = v[i];
     }
 
-    long long left = 1;
-    long long right = *max_element(v.begin(), v.end());
+    unsigned long long left = 1;
+    unsigned long long mid;
+    unsigned long long answer = 0;
 
-    long long mid;
     while(left <= right) {
         mid = (left + right) / 2;
         unsigned long long temp = solve(v, mid);
-        if(temp == n) break;
 
         if(temp < n) {
             right = mid - 1;
         }
         else {
+            if(mid > answer) answer = mid;
             left = mid + 1;
         }
     }
 
-    while(1) {
-        mid++;
-        unsigned long long a = solve(v, mid);
-        if(a < n) break;
-    }
-
-    printf("%d\n", mid-1);
+    printf("%lld\n", answer);
     return 0;
 }
